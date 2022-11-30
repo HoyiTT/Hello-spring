@@ -16,6 +16,7 @@ class MemoryMemberRepositoryTest {
     public void afterEach(){
         repository.clearStore();
     }
+    //Test가 끝날때마다 repository를 초기화
 
     @Test
     public void save(){
@@ -25,7 +26,10 @@ class MemoryMemberRepositoryTest {
         repository.save(member);
 
         Member result = repository.findById(member.getId()).get();
-        assertThat(member).isEqualTo(member);
+        //뒷부분 get은 optional로 만들어서 값을 꺼내기 위해 사용하는 get
+        assertThat(member).isEqualTo(result);
+        //Assetions는 static import했기에 적지 않았다.
+        // ember와 result 값이 같은지 확인, 같으면 오류 없이 종료된다.
     }
 
     @Test
@@ -54,7 +58,7 @@ class MemoryMemberRepositoryTest {
         repository.save(member2);
 
         List<Member> result = repository.findAll();
-
+        System.out.println(result);
         assertThat(result.size()).isEqualTo(2);
 
 
